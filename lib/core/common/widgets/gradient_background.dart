@@ -21,7 +21,7 @@ class GradientBackground extends StatelessWidget {
           child: Container(
             constraints: const BoxConstraints.expand(),
             height: double.infinity,
-            color: Colours.primaryColour,
+            color: Colours.secondaryColour,
           ),
         ),
         child,

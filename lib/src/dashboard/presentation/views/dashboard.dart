@@ -42,14 +42,18 @@ class _DashboardState extends State<Dashboard> {
               });
             }
           },
-          child: Container(
-            color: _isShowAllButton
-                ? Colors.black.withOpacity(0.3)
-                : Colors.transparent,
-            child: IndexedStack(
-              index: controller.currentIndex,
-              children: controller.screens,
-            ),
+          child: Stack(
+            children: [
+              IndexedStack(
+                index: controller.currentIndex,
+                children: controller.screens,
+              ),
+              Container(
+                color: _isShowAllButton
+                    ? Colors.black.withOpacity(0.3)
+                    : Colors.transparent,
+              ),
+            ],
           ),
         ),
         bottomNavigationBar: BottomSheetWidget(

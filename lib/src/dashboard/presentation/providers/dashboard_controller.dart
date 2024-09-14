@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:payung_pribadi_clone/core/common/views/blank_screen.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../core/common/app/providers/tab_navigator.dart';
@@ -39,10 +40,8 @@ class DashboardController extends ChangeNotifier {
       ChangeNotifierProvider(
           create: (_) => TabNavigator(
                 TabItem(
-                  child: const SizedBox(
-                    child: Center(
-                      child: Text("2"),
-                    ),
+                  child: const BlankScreen(
+                    title: "Cari",
                   ),
                 ),
               ),
@@ -50,51 +49,50 @@ class DashboardController extends ChangeNotifier {
       ChangeNotifierProvider(
           create: (_) => TabNavigator(
                 TabItem(
-                    child: const SizedBox(
-                  child: Center(
-                    child: Text("3"),
+                  child: const BlankScreen(
+                    title: "Keranjang",
                   ),
-                )),
+                ),
               ),
           child: const PersistentView()),
       ChangeNotifierProvider(
           create: (_) => TabNavigator(
                 TabItem(
-                    child: const SizedBox(
-                  child: Center(
-                    child: Text("4"),
+                  child: const BlankScreen(
+                    title: "Daftar Transaksi",
                   ),
-                )),
+                ),
               ),
           child: const PersistentView()),
       ChangeNotifierProvider(
           create: (_) => TabNavigator(
                 TabItem(
-                    child: const SizedBox(
-                  child: Center(
-                    child: Text("5"),
+                  child: const BlankScreen(
+                    title: "Voucher Saya",
                   ),
-                )),
+                ),
               ),
           child: const PersistentView()),
       ChangeNotifierProvider(
           create: (_) => TabNavigator(
                 TabItem(
-                    child: const SizedBox(
-                  child: Center(
-                    child: Text("6"),
+                  child: const BlankScreen(
+                    title: "Alamat Pengiriman",
                   ),
-                )),
+                ),
               ),
           child: const PersistentView()),
       ChangeNotifierProvider(
           create: (_) => TabNavigator(
                 TabItem(
-                    child: const SizedBox(
-                  child: Center(
-                    child: Text("7"),
+                  child: Container(
+                    height: double.infinity,
+                    color: Colors.red,
+                    child: const BlankScreen(
+                      title: "Daftar Teman",
+                    ),
                   ),
-                )),
+                ),
               ),
           child: const PersistentView()),
     ];

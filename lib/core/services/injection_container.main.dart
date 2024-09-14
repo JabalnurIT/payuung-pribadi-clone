@@ -17,6 +17,7 @@ Future<void> init() async {
       filePicker: filePicker);
 
   await _initProfile();
+  await _initHome();
 }
 
 Future<void> _initCore({
@@ -53,5 +54,19 @@ Future<void> _initProfile() async {
         databaseHelper: sl(),
         imagePicker: sl(),
       ),
+    );
+}
+
+Future<void> _initHome() async {
+  sl
+    ..registerFactory(
+      () => HomeBloc(
+        getAllWellness: sl(),
+      ),
+    )
+    ..registerLazySingleton(() => GetAllWellness(sl()))
+    ..registerLazySingleton<HomeRepository>(() => HomeRepositoryImpl(sl()))
+    ..registerLazySingleton<HomeLocalDataSource>(
+      () => const HomeLocalDataSourceImpl(),
     );
 }

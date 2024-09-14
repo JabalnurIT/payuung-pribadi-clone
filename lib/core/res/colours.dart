@@ -19,6 +19,8 @@ class Colours {
 
   static const Color quinaryColour = Color(0xFF222834);
 
+  static const Color textColour = Color(0xFF222834);
+
   static const Color errorColour = Color(0xFFE74C3C);
 
   static const Color successColour = Color(0xFF2ECC71);
