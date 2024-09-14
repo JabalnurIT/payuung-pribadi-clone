@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:payung_pribadi_clone/core/res/colours.dart';
 
-import '../../res/media_res.dart';
 import '../widgets/gradient_background.dart';
 
 class BlankScreen extends StatelessWidget {
@@ -28,7 +27,6 @@ class BlankScreen extends StatelessWidget {
         backgroundColor: Colours.primaryColour,
       ),
       body: GradientBackground(
-        image: MediaRes.colorBackground,
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

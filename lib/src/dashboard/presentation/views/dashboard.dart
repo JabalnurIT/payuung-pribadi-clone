@@ -48,11 +48,10 @@ class _DashboardState extends State<Dashboard> {
                 index: controller.currentIndex,
                 children: controller.screens,
               ),
-              Container(
-                color: _isShowAllButton
-                    ? Colors.black.withOpacity(0.3)
-                    : Colors.transparent,
-              ),
+              if (_isShowAllButton)
+                Container(
+                  color: Colors.black.withOpacity(0.3),
+                ),
             ],
           ),
         ),

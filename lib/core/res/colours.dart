@@ -9,7 +9,7 @@ class Colours {
     Color(0xFFFDFAD1),
   ];
 
-  static const Color primaryColour = Color.fromARGB(255, 248, 213, 57);
+  static const Color primaryColour = Color.fromARGB(255, 211, 175, 12);
 
   static const Color secondaryColour = Colors.white;
 

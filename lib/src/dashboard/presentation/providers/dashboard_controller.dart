@@ -101,7 +101,6 @@ class DashboardController extends ChangeNotifier {
   void changeIndex(int index) {
     if (index == _currentIndex) return;
     _currentIndex = index;
-    print(_currentIndex);
     _indexHistory.add(index);
     notifyListeners();
   }

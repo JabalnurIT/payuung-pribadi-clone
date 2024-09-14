@@ -81,7 +81,7 @@ class BottomSheetWidget extends StatelessWidget {
                           isShowAllButton
                               ? Icons.keyboard_arrow_down_rounded
                               : Icons.keyboard_arrow_up_rounded,
-                          color: Colours.primaryColour,
+                          color: Colours.quaternaryColour,
                           size: 46,
                         ),
                       ),

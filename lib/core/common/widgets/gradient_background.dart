@@ -4,12 +4,9 @@ import '../../res/colours.dart';
 
 class GradientBackground extends StatelessWidget {
   const GradientBackground({
-    required this.image,
     required this.child,
     super.key,
   });
-
-  final String image;
   final Widget child;
 
   @override
@@ -20,11 +17,15 @@ class GradientBackground extends StatelessWidget {
           alignment: Alignment.bottomCenter,
           child: Container(
             constraints: const BoxConstraints.expand(),
-            height: double.infinity,
-            color: Colours.secondaryColour,
+            decoration: const BoxDecoration(
+              color: Colours.secondaryColour,
+              borderRadius: BorderRadius.vertical(
+                top: Radius.circular(30),
+              ),
+            ),
+            child: child,
           ),
         ),
-        child,
       ],
     );
   }
