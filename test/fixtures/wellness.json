@@ -1,0 +1,17 @@
+{
+    "id": "1",
+    "title": "Wellness",
+    "category": "Health",
+    "price": 100000,
+    "discount": 0,
+    "stock": 10,
+    "minimumPurchase": 1,
+    "maximumPurchase": 5,
+    "description": "Wellness product",
+    "termAndCondition": [
+        "Term and Condition"
+    ],
+    "outlet": [
+        "Outlet"
+    ]
+}

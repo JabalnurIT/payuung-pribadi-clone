@@ -1,0 +1,47 @@
+{
+    "id": "1",
+    "name": "Budi",
+    "birthDate": "1990-01-01",
+    "gender": "Laki-laki",
+    "email": "example@gmail.com",
+    "phoneNumber": "081234567890",
+    "education": null,
+    "maritalStatus": null,
+    "registrationImage": null,
+    "registrationAddress": {
+        "id": "1",
+        "street": "Jl. Kaliurang KM 5",
+        "province": "DI Yogyakarta",
+        "regency": "Sleman",
+        "district": "Ngaglik",
+        "village": "Sinduharjo",
+        "postalCode": "55581"
+    },
+    "domicileAddress": {
+        "id": "1",
+        "street": "Jl. Kaliurang KM 5",
+        "province": "DI Yogyakarta",
+        "regency": "Sleman",
+        "district": "Ngaglik",
+        "village": "Sinduharjo",
+        "postalCode": "55581"
+    },
+    "companyInformation": {
+        "id": "1",
+        "name": "PT. Maju Mundur",
+        "address": "Jl. Kaliurang KM 5",
+        "department": "IT",
+        "workDuration": "8 hours"
+    },
+    "financialInformation": {
+        "id": "1",
+        "incomeResourch": "Gaji",
+        "annualIncome": 10000000,
+        "bankName": "BCA",
+        "bankBranch": "Yogyakarta",
+        "accountNumber": "1234567890123456",
+        "accountName": "Budi"
+    },
+    "wishlist": [],
+    "cart": []
+}
