@@ -26,7 +26,6 @@ Future<void> _initCore({
   required ImagePicker imagePicker,
   required FilePicker filePicker,
 }) async {
-  databaseFactory = databaseFactoryFfi;
   sl
     ..registerLazySingleton(() => dio)
     ..registerLazySingleton(() => api)

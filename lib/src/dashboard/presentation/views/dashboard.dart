@@ -1,12 +1,11 @@
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:payung_pribadi_clone/core/common/widgets/button_background.dart';
 import 'package:provider/provider.dart';
-import '../../../../core/common/widgets/custom_container_clipper.dart';
-import '../../../../core/res/colours.dart';
+import '../../../../core/common/widgets/bottom_sheet_widget.dart';
 import '../../../../core/res/media_res.dart';
 import '../providers/dashboard_controller.dart';
+import '../widgets/bottom_nav_column_item.dart';
+import '../widgets/bottom_nav_icon.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -18,6 +17,8 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
+  bool _isShowAllButton = false;
+  double _height = 120;
   @override
   void initState() {
     super.initState();
@@ -32,128 +33,114 @@ class _DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
     return Consumer<DashboardController>(builder: (_, controller, __) {
       return Scaffold(
-        body: IndexedStack(
-          index: controller.currentIndex,
-          children: controller.screens,
-        ),
-        bottomNavigationBar: Stack(
-          children: [
-            ClipPath(
-              clipper: CustomContainerClipper(
-                topLeftOffset: 50,
-                topRightOffset: 25,
-                bottomLeftOffset: 0,
-                bottomRightOffset: 0,
-              ),
-              child: Container(
-                height: 120,
-                decoration: BoxDecoration(
-                  gradient: Colours.darkLinearGradient(opacity: 1),
-                ),
-                child: Container(
-                  color: Colours.primaryColour.withOpacity(0.4),
-                ),
-              ),
+        body: GestureDetector(
+          onTap: () {
+            if (_isShowAllButton) {
+              setState(() {
+                _height = 120;
+                _isShowAllButton = false;
+              });
+            }
+          },
+          child: Container(
+            color: _isShowAllButton
+                ? Colors.black.withOpacity(0.3)
+                : Colors.transparent,
+            child: IndexedStack(
+              index: controller.currentIndex,
+              children: controller.screens,
             ),
-            SizedBox(
-              height: 120,
-              child: BottomNavigationBar(
-                currentIndex: controller.currentIndex,
-                showSelectedLabels: false,
-                showUnselectedLabels: false,
-                backgroundColor: Colors.transparent,
-                elevation: 0,
-                onTap: controller.changeIndex,
+          ),
+        ),
+        bottomNavigationBar: BottomSheetWidget(
+          onTap: () {
+            setState(() {
+              if (!_isShowAllButton) {
+                _height = 360;
+                _isShowAllButton = true;
+              } else {
+                _height = 120;
+                _isShowAllButton = false;
+              }
+            });
+          },
+          isShowAllButton: _isShowAllButton,
+          height: _height,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              BottomNavColumnItem(
+                controller: controller,
                 items: [
-                  BottomNavigationBarItem(
-                    icon: ButtonBackround(
-                      width: 80,
-                      height: 60,
-                      active: controller.currentIndex == 0,
-                      child: Container(
-                        padding: controller.currentIndex == 0
-                            ? const EdgeInsets.only(
-                                top: 16, left: 8, right: 8, bottom: 16)
-                            : const EdgeInsets.only(
-                                top: 20, left: 20, right: 20),
-                        child: SvgPicture.asset(
-                          controller.currentIndex == 0
-                              ? MediaRes.homeBold
-                              : MediaRes.homeLight,
-                          height: 32,
-                          width: 32,
-                          colorFilter: ColorFilter.mode(
-                            controller.currentIndex == 0
-                                ? Colors.white
-                                : Colours.primaryDisabledColour,
-                            BlendMode.srcIn,
-                          ),
-                        ),
-                      ),
-                    ),
-                    label: 'Home',
+                  BottomNavItemIcon(
+                    controller: controller,
+                    onTap: controller.changeIndex,
+                    icon: MediaRes.homeIcon,
+                    index: 0,
+                    label: 'Beranda',
                   ),
-                  BottomNavigationBarItem(
-                    icon: ButtonBackround(
-                      width: 80,
-                      height: 60,
-                      active: controller.currentIndex == 1,
-                      child: Container(
-                        padding: controller.currentIndex == 1
-                            ? const EdgeInsets.only(
-                                top: 16, left: 8, right: 8, bottom: 16)
-                            : const EdgeInsets.only(
-                                top: 20, left: 20, right: 20),
-                        child: SvgPicture.asset(
-                          controller.currentIndex == 1
-                              ? MediaRes.scanBold
-                              : MediaRes.scanLight,
-                          height: 32,
-                          width: 32,
-                          colorFilter: ColorFilter.mode(
-                            controller.currentIndex == 1
-                                ? Colors.white
-                                : Colours.primaryDisabledColour,
-                            BlendMode.srcIn,
-                          ),
-                        ),
-                      ),
-                    ),
-                    label: 'Search',
+                  BottomNavItemIcon(
+                    controller: controller,
+                    onTap: controller.changeIndex,
+                    icon: MediaRes.searchIcon,
+                    index: 1,
+                    label: 'Cari',
                   ),
-                  BottomNavigationBarItem(
-                    icon: ButtonBackround(
-                      width: 80,
-                      height: 60,
-                      active: controller.currentIndex == 2,
-                      child: Container(
-                        padding: controller.currentIndex == 2
-                            ? const EdgeInsets.only(
-                                top: 16, left: 8, right: 8, bottom: 16)
-                            : const EdgeInsets.only(
-                                top: 20, left: 20, right: 20),
-                        child: SvgPicture.asset(
-                          controller.currentIndex == 2
-                              ? MediaRes.addBold
-                              : MediaRes.addLight,
-                          height: 32,
-                          width: 32,
-                          colorFilter: ColorFilter.mode(
-                            controller.currentIndex == 2
-                                ? Colors.white
-                                : Colours.primaryDisabledColour,
-                            BlendMode.srcIn,
-                          ),
-                        ),
-                      ),
-                    ),
-                    label: 'Cart',
-                    backgroundColor: Colors.white,
+                  BottomNavItemIcon(
+                    controller: controller,
+                    onTap: controller.changeIndex,
+                    icon: MediaRes.cartIcon,
+                    index: 2,
+                    label: 'Keranjang',
                   ),
                 ],
               ),
-            ),
-          ],
+              BottomNavColumnItem(
+                controller: controller,
+                items: [
+                  BottomNavItemIcon(
+                    controller: controller,
+                    onTap: controller.changeIndex,
+                    icon: MediaRes.transactionIcon,
+                    index: 3,
+                    label: 'Daftar Transaksi',
+                  ),
+                  BottomNavItemIcon(
+                    controller: controller,
+                    onTap: controller.changeIndex,
+                    icon: MediaRes.voucherIcon,
+                    index: 4,
+                    label: 'Voucher Saya',
+                  ),
+                  BottomNavItemIcon(
+                    controller: controller,
+                    onTap: controller.changeIndex,
+                    icon: MediaRes.addressIcon,
+                    index: 5,
+                    label: 'Alamat Pengiriman',
+                  ),
+                ],
+              ),
+              BottomNavColumnItem(
+                controller: controller,
+                items: [
+                  BottomNavItemIcon(
+                    controller: controller,
+                    onTap: controller.changeIndex,
+                    icon: MediaRes.friendsIcon,
+                    index: 6,
+                    label: 'Daftar Teman',
+                  ),
+                  const BottomNavItemIcon(
+                    isActive: false,
+                  ),
+                  const BottomNavItemIcon(
+                    isActive: false,
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       );
     });

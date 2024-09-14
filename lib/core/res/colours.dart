@@ -9,9 +9,9 @@ class Colours {
     Color(0xFFFDFAD1),
   ];
 
-  static const Color primaryColour = Color(0xFF242C3B);
+  static const Color primaryColour = Color.fromARGB(255, 248, 213, 57);
 
-  static const Color secondaryColour = Color(0xFF37B6E9);
+  static const Color secondaryColour = Colors.white;
 
   static const Color tertiaryColour = Color(0xFF4B4CED);
 

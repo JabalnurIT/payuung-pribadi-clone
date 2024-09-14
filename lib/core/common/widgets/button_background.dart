@@ -39,10 +39,6 @@ class ButtonBackround extends StatelessWidget {
                       color: Colors.white.withOpacity(0.1),
                       width: 1,
                     ),
-                    // vertical: BorderSide(
-                    //   color: Colors.black.withOpacity(0.5),
-                    //   width: 2,
-                    // ),
                   ),
                   borderRadius: const BorderRadius.only(
                     topLeft: Radius.elliptical(27, 18),

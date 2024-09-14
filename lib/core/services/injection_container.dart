@@ -4,7 +4,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:get_it/get_it.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 import '../../src/profile/data/datasources/profile_local_data_source.dart';
 import '../../src/profile/data/repositories/profile_repository_impl.dart';

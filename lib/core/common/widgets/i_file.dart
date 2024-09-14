@@ -43,7 +43,7 @@ class IFile extends StatelessWidget {
                           child: Row(
                             children: [
                               SvgPicture.asset(
-                                MediaRes.acceptIcon,
+                                MediaRes.infoIcon,
                                 height: 20,
                                 width: 20,
                               ),
@@ -89,7 +89,7 @@ class IFile extends StatelessWidget {
                     ),
                     onPressed: onPressed,
                     icon: SvgPicture.asset(
-                      MediaRes.uploadIcon,
+                      MediaRes.transactionIcon,
                       height: 18,
                     ),
                     label: const Text(
