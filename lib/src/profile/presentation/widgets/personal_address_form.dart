@@ -728,7 +728,9 @@ class PersonalAddressForm extends StatelessWidget {
                     child: ElevatedButton(
                       onPressed: nextOnTap,
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colours.primaryColour,
+                        backgroundColor: nothingChanged
+                            ? Colours.secondaryDisabledColour
+                            : Colours.primaryColour,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(5),
                         ),
