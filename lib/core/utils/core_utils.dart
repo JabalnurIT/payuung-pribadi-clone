@@ -19,7 +19,7 @@ class CoreUtils {
               fontWeight: FontWeight.bold,
             ),
           ),
-          duration: const Duration(seconds: 20),
+          duration: const Duration(seconds: 3),
           behavior: SnackBarBehavior.floating,
           backgroundColor: color,
           shape: RoundedRectangleBorder(
