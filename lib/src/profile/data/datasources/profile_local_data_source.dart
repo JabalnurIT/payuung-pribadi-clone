@@ -90,7 +90,6 @@ class ProfileLocalDataSourceImpl implements ProfileLocalDataSource {
         "companyInformation": companyInformation,
         "financialInformation": financialInformation,
       };
-      print(user);
 
       return LocalUserModel.fromMap(user);
     } on ServerException {
