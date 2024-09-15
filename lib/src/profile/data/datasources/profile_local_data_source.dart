@@ -42,10 +42,8 @@ class ProfileLocalDataSourceImpl implements ProfileLocalDataSource {
     required ImageSource imageSource,
   }) async {
     try {
-      // await DatabaseHelper.open(name: dbName);
-      final result = await _imagePicker.pickImage(
-        source: imageSource,
-      );
+      final result =
+          await _imagePicker.pickImage(source: imageSource, imageQuality: 20);
 
       if (result == null) {
         throw ServerException(
@@ -59,9 +57,14 @@ class ProfileLocalDataSourceImpl implements ProfileLocalDataSource {
       // check if user already exists
       DataMap user = await _databaseHelper.get(table: "user", id: "0");
 
+      user = {
+        ...user,
+        "registrationImage": base64,
+      };
+
       await _databaseHelper.update(
         table: "user",
-        data: {"registrationImage": base64},
+        data: user,
       );
 
       user = await _databaseHelper.get(table: "user", id: "0");
@@ -69,6 +72,25 @@ class ProfileLocalDataSourceImpl implements ProfileLocalDataSource {
       if (user.isEmpty) {
         throw const ServerException(message: "User not found", statusCode: 404);
       }
+
+      final registrationAddress = await _databaseHelper.get(
+          table: "address", id: user["registrationAddressId"]);
+      final domicileAddress = await _databaseHelper.get(
+          table: "address", id: user["domicileAddressId"]);
+      final companyInformation = await _databaseHelper.get(
+          table: "company", id: user["companyInformationId"]);
+      final financialInformation = await _databaseHelper.get(
+          table: "financial", id: user["financialInformationId"]);
+
+      user = {
+        ...user,
+        "registrationImage": result.path.split('/').last,
+        "registrationAddress": registrationAddress,
+        "domicileAddress": domicileAddress,
+        "companyInformation": companyInformation,
+        "financialInformation": financialInformation,
+      };
+      print(user);
 
       return LocalUserModel.fromMap(user);
     } on ServerException {

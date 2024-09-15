@@ -15,6 +15,7 @@ class LocalUserModel extends LocalUser {
     super.education,
     super.maritalStatus,
     super.registrationImage,
+    super.registrationId,
     super.registrationAddress,
     super.domicileAddress,
     super.companyInformation,
@@ -34,6 +35,7 @@ class LocalUserModel extends LocalUser {
           education: null,
           maritalStatus: null,
           registrationImage: null,
+          registrationId: null,
           registrationAddress: const AddressModel.empty(),
           domicileAddress: const AddressModel.empty(),
           companyInformation: const CompanyModel.empty(),
@@ -52,6 +54,7 @@ class LocalUserModel extends LocalUser {
     String? education,
     String? maritalStatus,
     String? registrationImage,
+    String? registrationId,
     AddressModel? registrationAddress,
     AddressModel? domicileAddress,
     CompanyModel? companyInformation,
@@ -69,6 +72,7 @@ class LocalUserModel extends LocalUser {
       education: education ?? this.education,
       maritalStatus: maritalStatus ?? this.maritalStatus,
       registrationImage: registrationImage ?? this.registrationImage,
+      registrationId: registrationId ?? this.registrationId,
       registrationAddress: registrationAddress ?? this.registrationAddress,
       domicileAddress: domicileAddress ?? this.domicileAddress,
       companyInformation: companyInformation ?? this.companyInformation,
@@ -89,6 +93,7 @@ class LocalUserModel extends LocalUser {
           education: map['education'] as String?,
           maritalStatus: map['maritalStatus'] as String?,
           registrationImage: map['registrationImage'] as String?,
+          registrationId: map['registrationId'] as String?,
           registrationAddress:
               AddressModel.fromMap(map['registrationAddress'] as DataMap),
           domicileAddress:
@@ -112,6 +117,7 @@ class LocalUserModel extends LocalUser {
           education: user.education,
           maritalStatus: user.maritalStatus,
           registrationImage: user.registrationImage,
+          registrationId: user.registrationId,
           registrationAddress: user.registrationAddress != null
               ? AddressModel.fromEntity(user.registrationAddress!)
               : null,
@@ -139,6 +145,7 @@ class LocalUserModel extends LocalUser {
       'education': education,
       'maritalStatus': maritalStatus,
       'registrationImage': registrationImage,
+      'registrationId': registrationId,
       'registrationAddress':
           AddressModel.fromEntity(registrationAddress!).toMap(),
       'domicileAddress': AddressModel.fromEntity(domicileAddress!).toMap(),

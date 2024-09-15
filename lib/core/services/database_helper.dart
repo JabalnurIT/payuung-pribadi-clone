@@ -45,7 +45,7 @@ class DatabaseHelperImpl implements DatabaseHelper {
     String databasePath = p.join(appDocDir.path, path);
 
     var db = sqlite3.open(databasePath);
-    await deleteAllTable(db);
+    // await deleteAllTable(db);
     await initTable(db);
     return db;
   }
@@ -78,9 +78,9 @@ class DatabaseHelperImpl implements DatabaseHelper {
   static void _insertUser(Database db) {
     db.execute('''
       INSERT INTO user (
-        id, name, birthDate, gender, email, phoneNumber, education, maritalStatus, registrationImage, registrationAddressId, domicileAddressId, companyInformationId, financialInformationId, wishlist, cart)
+        id, name, birthDate, gender, email, phoneNumber, education, maritalStatus, registrationImage, registrationId, registrationAddressId, domicileAddressId, companyInformationId, financialInformationId, wishlist, cart)
       VALUES
-        ('0', 'John Doe', '1990-01-01', 'Laki-laki', 'example@gmail.com', '081234567890', 'S1', 'Belum Kawin', '', '0', '1', '0', '0', '', '')
+        ('0', 'John Doe', '1990-01-01', 'Laki-laki', 'example@gmail.com', '081234567890', 'S1', 'Belum Kawin', '', '', '0', '1', '0', '0', '', '')
     ''');
   }
 
@@ -111,6 +111,12 @@ class DatabaseHelperImpl implements DatabaseHelper {
     db.execute('DELETE FROM financial');
     db.execute('DELETE FROM user');
     db.execute('DELETE FROM wellness');
+
+    db.execute('DROP TABLE IF EXISTS address');
+    db.execute('DROP TABLE IF EXISTS company');
+    db.execute('DROP TABLE IF EXISTS financial');
+    db.execute('DROP TABLE IF EXISTS user');
+    db.execute('DROP TABLE IF EXISTS wellness');
   }
 
   static Future<void> initTable(
@@ -161,6 +167,7 @@ class DatabaseHelperImpl implements DatabaseHelper {
         education TEXT,
         maritalStatus TEXT,
         registrationImage TEXT,
+        registrationId TEXT,
         registrationAddressId TEXT,
         domicileAddressId TEXT,
         companyInformationId TEXT,

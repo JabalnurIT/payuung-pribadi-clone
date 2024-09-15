@@ -38,6 +38,7 @@ class PersonalScreenState extends State<PersonalScreen> {
   GlobalKey<FormState> personalBioFormKey = GlobalKey<FormState>();
 
   TextEditingController registrationImageController = TextEditingController();
+  TextEditingController registrationIdController = TextEditingController();
   TextEditingController registrationAddressController = TextEditingController();
   TextEditingController registrationProvinceController =
       TextEditingController();
@@ -84,6 +85,7 @@ class PersonalScreenState extends State<PersonalScreen> {
     educationController.text = user.education ?? '';
     maritalStatusController.text = user.maritalStatus ?? '';
     registrationImageController.text = user.registrationImage ?? '';
+    registrationIdController.text = user.registrationId ?? '';
     registrationAddressController.text = user.registrationAddress?.street ?? '';
     registrationProvinceController.text =
         user.registrationAddress?.province ?? '';
@@ -128,6 +130,7 @@ class PersonalScreenState extends State<PersonalScreen> {
     educationController.addListener(() => setState(() {}));
     maritalStatusController.addListener(() => setState(() {}));
     registrationImageController.addListener(() => setState(() {}));
+    registrationIdController.addListener(() => setState(() {}));
     registrationAddressController.addListener(() => setState(() {}));
     registrationProvinceController.addListener(() => setState(() {}));
     registrationRegencyController.addListener(() => setState(() {}));
@@ -162,6 +165,7 @@ class PersonalScreenState extends State<PersonalScreen> {
     educationController.dispose();
     maritalStatusController.dispose();
     registrationImageController.dispose();
+    registrationIdController.dispose();
     registrationAddressController.dispose();
     registrationProvinceController.dispose();
     registrationRegencyController.dispose();
@@ -207,6 +211,9 @@ class PersonalScreenState extends State<PersonalScreen> {
 
   bool get registrationImageChanged =>
       _user.registrationImage != registrationImageController.text.trim();
+
+  bool get registrationIdChanged =>
+      _user.registrationId != registrationIdController.text.trim();
 
   bool get registrationAddressChanged =>
       _user.registrationAddress?.street !=
@@ -297,6 +304,7 @@ class PersonalScreenState extends State<PersonalScreen> {
       !educationChanged &&
       !maritalStatusChanged &&
       !registrationImageChanged &&
+      !registrationIdChanged &&
       !registrationAddressChanged &&
       !registrationProvinceChanged &&
       !registrationRegencyChanged &&
@@ -361,6 +369,16 @@ class PersonalScreenState extends State<PersonalScreen> {
               context.userProvider.changeIndex(0);
               Navigator.of(context).pop();
             }
+            CoreUtils.showSnackBar(
+              context,
+              'Informasi pribadi berhasil diperbarui',
+              Colours.successColour,
+            );
+            setState(() {});
+          } else if (state is RegistrationImageUpdated) {
+            context.userProvider.initUser(state.user);
+            initController(state.user);
+
             CoreUtils.showSnackBar(
               context,
               'Informasi pribadi berhasil diperbarui',
@@ -456,6 +474,10 @@ class PersonalScreenState extends State<PersonalScreen> {
                                         education: educationController.text,
                                         maritalStatus:
                                             maritalStatusController.text,
+                                        registrationImage: userProvider
+                                            .user!.registrationImage,
+                                        registrationId:
+                                            userProvider.user!.registrationId,
                                         registrationAddress: userProvider
                                             .user!.registrationAddress,
                                         domicileAddress:
@@ -478,6 +500,7 @@ class PersonalScreenState extends State<PersonalScreen> {
                         PersonalAddressForm(
                           registrationImageController:
                               registrationImageController,
+                          registrationIdController: registrationIdController,
                           registrationAddressController:
                               registrationAddressController,
                           registrationProvinceController:
@@ -555,6 +578,10 @@ class PersonalScreenState extends State<PersonalScreen> {
                                         education: userProvider.user!.education,
                                         maritalStatus:
                                             userProvider.user!.maritalStatus,
+                                        registrationImage:
+                                            registrationImageController.text,
+                                        registrationId:
+                                            registrationIdController.text,
                                         registrationAddress: Address(
                                           id: userProvider
                                               .user!.registrationAddress!.id,
@@ -670,6 +697,10 @@ class PersonalScreenState extends State<PersonalScreen> {
                                         education: userProvider.user!.education,
                                         maritalStatus:
                                             userProvider.user!.maritalStatus,
+                                        registrationImage: userProvider
+                                            .user!.registrationImage,
+                                        registrationId:
+                                            userProvider.user!.registrationId,
                                         registrationAddress: userProvider
                                             .user!.registrationAddress,
                                         domicileAddress:

@@ -10,6 +10,7 @@ class PersonalAddressForm extends StatelessWidget {
   const PersonalAddressForm({
     super.key,
     required this.registrationImageController,
+    required this.registrationIdController,
     required this.registrationAddressController,
     required this.registrationProvinceController,
     required this.registrationRegencyController,
@@ -32,6 +33,7 @@ class PersonalAddressForm extends StatelessWidget {
   });
 
   final TextEditingController registrationImageController;
+  final TextEditingController registrationIdController;
   final TextEditingController registrationAddressController;
   final TextEditingController registrationProvinceController;
 
@@ -65,7 +67,7 @@ class PersonalAddressForm extends StatelessWidget {
           child: Column(
             children: [
               Container(
-                height: 150,
+                height: 160,
                 padding:
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 margin: const EdgeInsets.symmetric(horizontal: 30, vertical: 5),
@@ -107,14 +109,27 @@ class PersonalAddressForm extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(width: 10),
-                          const Text(
-                            'Upload KTP',
-                            style: TextStyle(
-                              color: Colours.quinaryColour,
-                              fontWeight: FontWeight.w500,
-                              fontSize: 16,
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.6,
+                            child: Text(
+                              registrationImageController.text == ''
+                                  ? 'Upload KTP'
+                                  : registrationImageController.text,
+                              style: const TextStyle(
+                                color: Colours.quinaryColour,
+                                fontWeight: FontWeight.w500,
+                                fontSize: 14,
+                                overflow: TextOverflow.fade,
+                              ),
+                              overflow: TextOverflow.fade,
                             ),
                           ),
+                          const Expanded(child: SizedBox()),
+                          if (registrationImageController.text != '')
+                            const Icon(
+                              Icons.check_circle,
+                              color: Colours.successColour,
+                            ),
                         ],
                       ),
                     ),
@@ -139,7 +154,7 @@ class PersonalAddressForm extends StatelessWidget {
                       ],
                     ),
                     IFields(
-                      controller: registrationImageController,
+                      controller: registrationIdController,
                       hintText: 'NIK',
                     ),
                   ],

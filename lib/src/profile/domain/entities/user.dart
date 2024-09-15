@@ -15,6 +15,7 @@ class LocalUser extends Equatable {
     this.education,
     this.maritalStatus,
     this.registrationImage,
+    this.registrationId,
     this.registrationAddress,
     this.domicileAddress,
     this.companyInformation,
@@ -33,6 +34,7 @@ class LocalUser extends Equatable {
         education = null,
         maritalStatus = null,
         registrationImage = null,
+        registrationId = null,
         registrationAddress = const Address.empty(),
         domicileAddress = const Address.empty(),
         companyInformation = const Company.empty(),
@@ -49,6 +51,7 @@ class LocalUser extends Equatable {
   final String? education;
   final String? maritalStatus;
   final String? registrationImage;
+  final String? registrationId;
   final Address? registrationAddress;
   final Address? domicileAddress;
   final Company? companyInformation;
@@ -67,6 +70,7 @@ class LocalUser extends Equatable {
         education,
         maritalStatus,
         registrationImage,
+        registrationId,
         registrationAddress,
         domicileAddress,
         companyInformation,
@@ -80,7 +84,8 @@ class LocalUser extends Equatable {
     return 'Item{id: $id, name: $name, birthDate: $birthDate, '
         'gender: $gender, email: $email, phoneNumber: $phoneNumber, '
         'education: $education, maritalStatus: $maritalStatus, '
-        'registrationImage: $registrationImage, registrationAddress: $registrationAddress, '
+        'registrationImage: $registrationImage, registrationId: $registrationId, '
+        'registrationAddress: $registrationAddress, '
         'domicileAddress: $domicileAddress, companyInformation: $companyInformation, '
         'financialInformation: $financialInformation, wishlist: $wishlist, cart: $cart}';
   }

@@ -8,6 +8,7 @@
     "education": null,
     "maritalStatus": null,
     "registrationImage": null,
+    "registrationId": null,
     "registrationAddress": {
         "id": "1",
         "street": "Jl. Kaliurang KM 5",

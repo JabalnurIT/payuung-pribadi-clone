@@ -63,6 +63,7 @@
 - education (String)
 - maritalStatus (String)
 - registrationImage (String)
+- registrationId (String)
 - registrationAddress (Address)
 - domicileAddress (Address)
 - companyInformation(Company)

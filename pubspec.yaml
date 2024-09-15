@@ -26,7 +26,6 @@ dependencies:
   uuid: ^4.2.1
   flutter_svg: ^2.0.9
   file_picker: ^8.0.0+1
-  image_picker: ^1.1.2
   timeline_tile: ^2.0.0
   number_pagination: ^1.1.4
   scrollable_table_view: ^2.0.3
@@ -35,6 +34,7 @@ dependencies:
   sqlite3_flutter_libs: ^0.5.24
   path_provider: ^2.1.4
   path: ^1.9.0
+  image_picker: ^1.1.2
 
 dev_dependencies:
   flutter_test:
