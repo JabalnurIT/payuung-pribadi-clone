@@ -4,7 +4,10 @@ Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
     case SplashScreen.routeName:
       return _pageBuilder(
-        (_) => const SplashScreen(),
+        (_) => BlocProvider(
+          create: (_) => sl<ProfileBloc>(),
+          child: const SplashScreen(),
+        ),
         settings: settings,
       );
     case Dashboard.routeName:
@@ -14,9 +17,14 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       );
     case ProfileScreen.routeName:
       return _pageBuilder(
+        (_) => const ProfileScreen(),
+        settings: settings,
+      );
+    case PersonalScreen.routeName:
+      return _pageBuilder(
         (_) => BlocProvider(
           create: (_) => sl<ProfileBloc>(),
-          child: const ProfileScreen(),
+          child: const PersonalScreen(),
         ),
         settings: settings,
       );

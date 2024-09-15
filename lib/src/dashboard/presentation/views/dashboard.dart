@@ -73,7 +73,6 @@ class _DashboardState extends State<Dashboard> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               BottomNavColumnItem(
-                controller: controller,
                 items: [
                   BottomNavItemIcon(
                     controller: controller,
@@ -99,7 +98,6 @@ class _DashboardState extends State<Dashboard> {
                 ],
               ),
               BottomNavColumnItem(
-                controller: controller,
                 items: [
                   BottomNavItemIcon(
                     controller: controller,
@@ -125,7 +123,6 @@ class _DashboardState extends State<Dashboard> {
                 ],
               ),
               BottomNavColumnItem(
-                controller: controller,
                 items: [
                   BottomNavItemIcon(
                     controller: controller,

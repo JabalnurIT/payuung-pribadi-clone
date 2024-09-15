@@ -15,9 +15,9 @@ class Colours {
 
   static const Color tertiaryColour = Color(0xFF4B4CED);
 
-  static const Color quaternaryColour = Color(0xFF353F54);
+  static const Color quaternaryColour = Color.fromARGB(255, 75, 84, 104);
 
-  static const Color quinaryColour = Color(0xFF222834);
+  static const Color quinaryColour = Color.fromARGB(255, 36, 39, 46);
 
   static const Color textColour = Color(0xFF222834);
 
@@ -29,7 +29,7 @@ class Colours {
 
   static const Color infoColour = Color(0xFF3498DB);
 
-  static const Color primaryDisabledColour = Color(0xFFB0B0B0);
+  static const Color primaryDisabledColour = Color.fromARGB(255, 153, 153, 153);
 
   static const Color secondaryDisabledColour = Color(0xFFD0D0D0);
 

@@ -3,12 +3,10 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 
-import '../res/colours.dart';
-
 class CoreUtils {
   const CoreUtils._();
 
-  static void showSnackBar(BuildContext context, String message) {
+  static void showSnackBar(BuildContext context, String message, Color color) {
     ScaffoldMessenger.of(context)
       ..removeCurrentSnackBar()
       ..showSnackBar(
@@ -21,8 +19,9 @@ class CoreUtils {
               fontWeight: FontWeight.bold,
             ),
           ),
+          duration: const Duration(seconds: 3),
           behavior: SnackBarBehavior.floating,
-          backgroundColor: Colours.primaryColour,
+          backgroundColor: color,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),
@@ -62,5 +61,13 @@ class CoreUtils {
           "data:image/${filePath.split('/').last.split('.').last};base64,$base64File";
     }
     return uriBase64;
+  }
+
+  static toMoney(double price) {
+    // Rp100.000
+    return "Rp${price.toStringAsFixed(0).replaceAllMapped(
+          RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
+          (Match m) => '${m[1]}.',
+        )}";
   }
 }

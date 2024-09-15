@@ -99,14 +99,8 @@ class WellnessModel extends Wellness {
           minimumPurchase: map['minimumPurchase'] as int,
           maximumPurchase: map['maximumPurchase'] as int,
           description: map['description'] as String,
-          termAndCondition: (map['termAndCondition'] as List?) == null
-              ? null
-              : (map['termAndCondition'] as List)
-                  .map((e) => e as String)
-                  .toList(),
-          outlet: (map['outlet'] as List?) == null
-              ? null
-              : (map['outlet'] as List).map((e) => e as String).toList(),
+          termAndCondition: (map['termAndCondition'] as String?)?.split("###"),
+          outlet: (map['outlet'] as String?)?.split("###"),
         );
 
   WellnessModel.fromEntity(Wellness address)
@@ -135,8 +129,8 @@ class WellnessModel extends Wellness {
       'minimumPurchase': minimumPurchase,
       'maximumPurchase': maximumPurchase,
       'description': description,
-      'termAndCondition': termAndCondition,
-      'outlet': outlet,
+      'termAndCondition': termAndCondition?.join("###"),
+      'outlet': outlet?.join("###"),
     };
   }
 }

@@ -18,5 +18,6 @@ import '../../src/profile/domain/usecases/get_profile.dart';
 import '../../src/profile/domain/usecases/update_profile.dart';
 import '../../src/profile/presentation/bloc/profile_bloc.dart';
 import '../services/api.dart';
+import 'database_helper.dart';
 
 part 'injection_container.main.dart';

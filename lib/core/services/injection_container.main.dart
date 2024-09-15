@@ -8,13 +8,16 @@ Future<void> init() async {
   final api = API();
   final imagePicker = ImagePicker();
   final filePicker = FilePicker.platform;
+  final databaseHelper = DatabaseHelperImpl.instance();
 
   await _initCore(
-      prefs: prefs,
-      dio: dio,
-      api: api,
-      imagePicker: imagePicker,
-      filePicker: filePicker);
+    prefs: prefs,
+    dio: dio,
+    api: api,
+    imagePicker: imagePicker,
+    filePicker: filePicker,
+    databaseHelper: databaseHelper,
+  );
 
   await _initProfile();
   await _initHome();
@@ -26,13 +29,15 @@ Future<void> _initCore({
   required API api,
   required ImagePicker imagePicker,
   required FilePicker filePicker,
+  required DatabaseHelper databaseHelper,
 }) async {
   sl
     ..registerLazySingleton(() => dio)
     ..registerLazySingleton(() => api)
     ..registerLazySingleton(() => prefs)
     ..registerLazySingleton(() => imagePicker)
-    ..registerLazySingleton(() => filePicker);
+    ..registerLazySingleton(() => filePicker)
+    ..registerLazySingleton(() => databaseHelper);
 }
 
 Future<void> _initProfile() async {
@@ -51,8 +56,8 @@ Future<void> _initProfile() async {
         () => ProfileRepositoryImpl(sl()))
     ..registerLazySingleton<ProfileLocalDataSource>(
       () => ProfileLocalDataSourceImpl(
-        databaseHelper: sl(),
         imagePicker: sl(),
+        databaseHelper: sl(),
       ),
     );
 }
@@ -67,6 +72,8 @@ Future<void> _initHome() async {
     ..registerLazySingleton(() => GetAllWellness(sl()))
     ..registerLazySingleton<HomeRepository>(() => HomeRepositoryImpl(sl()))
     ..registerLazySingleton<HomeLocalDataSource>(
-      () => const HomeLocalDataSourceImpl(),
+      () => HomeLocalDataSourceImpl(
+        databaseHelper: sl(),
+      ),
     );
 }

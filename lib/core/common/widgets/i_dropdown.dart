@@ -33,7 +33,7 @@ class IDropdown extends StatelessWidget {
               Icons.arrow_drop_down,
             ),
       ),
-      iconEnabledColor: Colours.primaryColour,
+      iconEnabledColor: Colours.quinaryColour,
       value: controller.text == '' ? null : controller.text,
       onChanged: (value) {
         controller.text = value.toString();
@@ -51,9 +51,9 @@ class IDropdown extends StatelessWidget {
       items: items ?? [],
       dropdownColor: fillColor,
       style: const TextStyle(
-        fontSize: 15,
+        fontSize: 16,
         fontFamily: Fonts.inter,
-        color: Colours.primaryColour,
+        color: Colours.quinaryColour,
       ),
       decoration: InputDecoration(
         border: OutlineInputBorder(
@@ -61,7 +61,7 @@ class IDropdown extends StatelessWidget {
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
-          borderSide: const BorderSide(color: Colours.primaryColour),
+          borderSide: const BorderSide(color: Colours.primaryDisabledColour),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
@@ -74,7 +74,7 @@ class IDropdown extends StatelessWidget {
         hintText: hintText,
         hintStyle: hintStyle ??
             const TextStyle(
-              color: Colours.primaryColour,
+              color: Colours.quinaryColour,
               fontFamily: Fonts.inter,
               fontSize: 16,
               fontWeight: FontWeight.w400,

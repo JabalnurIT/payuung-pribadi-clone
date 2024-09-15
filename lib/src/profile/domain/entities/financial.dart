@@ -14,7 +14,7 @@ class Financial extends Equatable {
   const Financial.empty({String? id})
       : id = id ?? "1",
         incomeResourch = 'Gaji',
-        annualIncome = 10000000,
+        annualIncome = "10000000",
         bankName = 'BCA',
         bankBranch = 'Yogyakarta',
         accountNumber = '1234567890123456',
@@ -22,7 +22,7 @@ class Financial extends Equatable {
 
   final String id;
   final String incomeResourch;
-  final double? annualIncome;
+  final String? annualIncome;
   final String? bankName;
   final String? bankBranch;
   final String? accountNumber;

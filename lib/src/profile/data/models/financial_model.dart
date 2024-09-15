@@ -16,7 +16,7 @@ class FinancialModel extends Financial {
       : this(
           id: id ?? '1',
           incomeResourch: 'Gaji',
-          annualIncome: 10000000,
+          annualIncome: "10000000",
           bankName: 'BCA',
           bankBranch: 'Yogyakarta',
           accountNumber: '1234567890123456',
@@ -26,7 +26,7 @@ class FinancialModel extends Financial {
   FinancialModel copyWith({
     String? id,
     String? incomeResourch,
-    double? annualIncome,
+    String? annualIncome,
     String? bankName,
     String? bankBranch,
     String? accountNumber,
@@ -47,9 +47,7 @@ class FinancialModel extends Financial {
       : super(
           id: map['id'] as String,
           incomeResourch: map['incomeResourch'] as String,
-          annualIncome: map['annualIncome'].runtimeType == double
-              ? map['annualIncome'] as double?
-              : map['annualIncome'].toDouble() as double,
+          annualIncome: map['annualIncome'] as String?,
           bankName: map['bankName'] as String?,
           bankBranch: map['bankBranch'] as String?,
           accountNumber: map['accountNumber'] as String?,

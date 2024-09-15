@@ -59,7 +59,7 @@ class IFields extends StatelessWidget {
       style: const TextStyle(
         fontSize: 16,
         fontWeight: FontWeight.w400,
-        color: Colours.primaryColour,
+        color: Colours.quaternaryColour,
         fontFamily: Fonts.inter,
       ),
       readOnly: readOnly,
@@ -69,7 +69,7 @@ class IFields extends StatelessWidget {
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
-          borderSide: const BorderSide(color: Colours.primaryColour),
+          borderSide: const BorderSide(color: Colours.primaryDisabledColour),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),

@@ -2,10 +2,13 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:payung_pribadi_clone/core/services/database_helper.dart';
 import 'package:payung_pribadi_clone/core/utils/typedef.dart';
 
 import '../../../../core/errors/exceptions.dart';
+import '../../../../core/services/database_helper.dart';
+import '../models/address_model.dart';
+import '../models/company_modal.dart';
+import '../models/financial_model.dart';
 import '../models/user_model.dart';
 
 abstract class ProfileLocalDataSource {
@@ -39,11 +42,9 @@ class ProfileLocalDataSourceImpl implements ProfileLocalDataSource {
     required ImageSource imageSource,
   }) async {
     try {
-      // await _databaseHelper.open(name: dbName);
+      // await DatabaseHelper.open(name: dbName);
       final result = await _imagePicker.pickImage(
         source: imageSource,
-        imageQuality: 100,
-        maxWidth: 1024,
       );
 
       if (result == null) {
@@ -55,27 +56,8 @@ class ProfileLocalDataSourceImpl implements ProfileLocalDataSource {
       final bytes = await file.readAsBytes();
       final base64 = base64Encode(bytes);
 
-      if (!await _databaseHelper.checkTable(table: "user")) {
-        await _databaseHelper.initTable();
-        if (!await _databaseHelper.checkTable(table: "user")) {
-          throw const ServerException(
-              message: "User table not found", statusCode: 404);
-        }
-      }
-
       // check if user already exists
       DataMap user = await _databaseHelper.get(table: "user", id: "0");
-
-      if (user.isEmpty) {
-        await _databaseHelper.insert(
-          table: "user",
-          data: LocalUserModel.empty().toMap(),
-        );
-        if ((await _databaseHelper.get(table: "user", id: "0")).isEmpty) {
-          throw const ServerException(
-              message: "User not found", statusCode: 404);
-        }
-      }
 
       await _databaseHelper.update(
         table: "user",
@@ -87,8 +69,6 @@ class ProfileLocalDataSourceImpl implements ProfileLocalDataSource {
       if (user.isEmpty) {
         throw const ServerException(message: "User not found", statusCode: 404);
       }
-
-      await _databaseHelper.close();
 
       return LocalUserModel.fromMap(user);
     } on ServerException {
@@ -102,20 +82,27 @@ class ProfileLocalDataSourceImpl implements ProfileLocalDataSource {
   @override
   Future<LocalUserModel> getProfile() async {
     try {
-      if (!await _databaseHelper.checkTable(table: "user")) {
-        await _databaseHelper.initTable();
-        if (!await _databaseHelper.checkTable(table: "user")) {
-          throw const ServerException(
-              message: "User table not found", statusCode: 404);
-        }
-      }
+      DataMap user = await _databaseHelper.get(table: "user", id: "0");
+      final registrationAddress = await _databaseHelper.get(
+          table: "address", id: user["registrationAddressId"]);
+      final domicileAddress = await _databaseHelper.get(
+          table: "address", id: user["domicileAddressId"]);
+      final companyInformation = await _databaseHelper.get(
+          table: "company", id: user["companyInformationId"]);
+      final financialInformation = await _databaseHelper.get(
+          table: "financial", id: user["financialInformationId"]);
 
-      final user = await _databaseHelper.get(table: "user", id: "0");
+      user = {
+        ...user,
+        "registrationAddress": registrationAddress,
+        "domicileAddress": domicileAddress,
+        "companyInformation": companyInformation,
+        "financialInformation": financialInformation,
+      };
 
       if (user.isEmpty) {
         throw const ServerException(message: "User not found", statusCode: 404);
       }
-      await _databaseHelper.close();
 
       return LocalUserModel.fromMap(user);
     } on ServerException {
@@ -129,20 +116,52 @@ class ProfileLocalDataSourceImpl implements ProfileLocalDataSource {
   @override
   Future<LocalUserModel> updateProfile({required LocalUserModel user}) async {
     try {
-      if (!await _databaseHelper.checkTable(table: "user")) {
-        await _databaseHelper.initTable();
-        if (!await _databaseHelper.checkTable(table: "user")) {
-          throw const ServerException(
-              message: "User table not found", statusCode: 404);
-        }
-      }
+      DataMap registrationAddressDatamap =
+          AddressModel.fromEntity(user.registrationAddress!).toMap();
+      DataMap domicileAddressDatamap =
+          AddressModel.fromEntity(user.domicileAddress!).toMap();
+      DataMap companyInformationDatamap =
+          CompanyModel.fromEntity(user.companyInformation!).toMap();
+      DataMap financialInformationDatamap =
+          FinancialModel.fromEntity(user.financialInformation!).toMap();
+
+      DataMap userDatamap = {
+        ...user.toMap(),
+        "registrationAddressId": user.registrationAddress?.id ?? '',
+        "domicileAddressId": user.domicileAddress?.id ?? '',
+        "companyInformationId": user.companyInformation?.id ?? '',
+        "financialInformationId": user.financialInformation?.id ?? '',
+      };
+      userDatamap.remove("registrationAddress");
+      userDatamap.remove("domicileAddress");
+      userDatamap.remove("companyInformation");
+      userDatamap.remove("financialInformation");
 
       await _databaseHelper.update(
         table: "user",
-        data: user.toMap(),
+        data: userDatamap,
       );
 
-      await _databaseHelper.close();
+      await _databaseHelper.update(
+        table: "address",
+        data: registrationAddressDatamap,
+      );
+
+      await _databaseHelper.update(
+        table: "address",
+        data: domicileAddressDatamap,
+      );
+
+      await _databaseHelper.update(
+        table: "company",
+        data: companyInformationDatamap,
+      );
+
+      await _databaseHelper.update(
+        table: "financial",
+        data: financialInformationDatamap,
+      );
+
       return user;
     } on ServerException {
       rethrow;

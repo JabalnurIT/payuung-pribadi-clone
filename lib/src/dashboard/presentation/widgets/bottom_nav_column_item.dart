@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../providers/dashboard_controller.dart';
-
 class BottomNavColumnItem extends StatelessWidget {
   const BottomNavColumnItem({
     super.key,
-    required this.controller,
     required this.items,
   });
 
-  final DashboardController controller;
   final List<Widget> items;
 
   @override

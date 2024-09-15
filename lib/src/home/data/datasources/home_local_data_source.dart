@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:sqflite/sqflite.dart';
 
 import '../../../../core/errors/exceptions.dart';
+import '../../../../core/services/database_helper.dart';
 import '../models/wellness_model.dart';
 
 abstract class HomeLocalDataSource {
@@ -13,25 +13,23 @@ abstract class HomeLocalDataSource {
 const dbName = "payung_pribadi.db";
 
 class HomeLocalDataSourceImpl implements HomeLocalDataSource {
-  const HomeLocalDataSourceImpl();
+  const HomeLocalDataSourceImpl({
+    required DatabaseHelper databaseHelper,
+  }) : _databaseHelper = databaseHelper;
+
+  final DatabaseHelper _databaseHelper;
 
   @override
   Future<List<WellnessModel>> getAllWellness() async {
     try {
-      final db = await openDatabase(dbName);
+      final wellnesses = await _databaseHelper.getAll(table: "wellness");
 
-      final result = await db.query(
-        "wellness",
-      );
-
-      if (result.isEmpty) {
+      if (wellnesses.isEmpty) {
         throw const ServerException(
             message: "Wellness not found", statusCode: 404);
       }
 
-      await db.close();
-
-      return result.map((e) => WellnessModel.fromMap(e)).toList();
+      return wellnesses.map((e) => WellnessModel.fromMap(e)).toList();
     } on ServerException {
       rethrow;
     } catch (e, s) {

@@ -97,12 +97,8 @@ class LocalUserModel extends LocalUser {
               CompanyModel.fromMap(map['companyInformation'] as DataMap),
           financialInformation:
               FinancialModel.fromMap(map['financialInformation'] as DataMap),
-          wishlist: (map['wishlist'] as List?) == null
-              ? null
-              : (map['wishlist'] as List).map((e) => e as String).toList(),
-          cart: (map['cart'] as List?) == null
-              ? null
-              : (map['cart'] as List).map((e) => e as String).toList(),
+          wishlist: (map['wishlist'] as String?)?.split("###"),
+          cart: (map['cart'] as String?)?.split("###"),
         );
 
   LocalUserModel.fromEntity(LocalUser user)
@@ -150,8 +146,8 @@ class LocalUserModel extends LocalUser {
           CompanyModel.fromEntity(companyInformation!).toMap(),
       'financialInformation':
           FinancialModel.fromEntity(financialInformation!).toMap(),
-      'wishlist': wishlist,
-      'cart': cart,
+      'wishlist': wishlist?.join("###"),
+      'cart': cart?.join("###"),
     };
   }
 }

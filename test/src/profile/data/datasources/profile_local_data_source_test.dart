@@ -113,10 +113,6 @@ void main() {
           ),
         ).thenAnswer((_) async => tLocalUser.toMap());
 
-        when(
-          () => databaseHelper.close(),
-        ).thenAnswer((_) async => Future.value());
-
         final call = dataSource.getProfile;
 
         expect(
@@ -152,10 +148,6 @@ void main() {
             data: any(named: 'data'),
           ),
         ).thenAnswer((_) async => tLocalUser.toMap());
-
-        when(
-          () => databaseHelper.close(),
-        ).thenAnswer((_) async => Future.value());
 
         final call = dataSource.updateProfile;
 
